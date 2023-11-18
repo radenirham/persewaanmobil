@@ -5,6 +5,11 @@
   <!-- Content Header (Page header) -->
   <div class="content-header">
     <div class="container-fluid">
+      @if(session('success'))
+          <div class="alert alert-success">
+              {{ session('success') }}
+          </div>
+      @endif
       <div class="row mb-2">
         <div class="col-sm-6">
           <h1 class="m-0">Mobil</h1>

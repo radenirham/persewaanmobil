@@ -38,12 +38,18 @@ class PeminjamanController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'merek' => 'required',
+            'awal_sewa' => 'required',
+            'akhir_sewa' => 'required',
+        ]);
+
         $pinjam = new peminjaman;
         $pinjam->id_merek = $request->merek;
         $pinjam->awal_sewa = $request->awal_sewa;
         $pinjam->akhir_sewa = $request->akhir_sewa;
         $pinjam->save();
-        return redirect()->route('pinjam.index');
+        return redirect()->route('pinjam.index')->with('success', 'Data peminjaman berhasil disimpan.');
     }
 
     /**

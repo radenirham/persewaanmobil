@@ -26,6 +26,16 @@
   <!-- Content Header (Page header) -->
   <div class="content-header">
     <div class="container-fluid">
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+    @if(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
       <div class="row mb-2">
         <div class="col-sm-6">
           <h1 class="m-0">Pengembalian Mobil</h1>
@@ -50,10 +60,16 @@
           <!-- form start -->
           <form action="{{route('pengembalian.store')}}" method="post">
               @csrf
+           
               <div class="card-body">
                 <div class="form-group">
                     <label for="plat">Plat Nomor</label>
                     <input type="text" class="form-control" id="plat" placeholder="Input Plat Nomor Mobil" name="platnomor">
+                    @foreach ($errors->get('platnomor') as $msg)
+                      <div class="alert alert-danger" role="alert">
+                        <p class="card-content red-text">{{ $msg }}</p>
+                      </div>
+                    @endforeach
                 </div>
               </div>
               <div class="card-footer">
@@ -76,7 +92,9 @@
               <tbody>
               @foreach($pengembalian as $item)
                 <tr>
-                    <td>{{ $item->mobil->id_platnomor }}</td>
+                    <td>{{ $item->mobil->merek }}</td>
+                    <td>{{ $item->mobil->platnomor }}</td>
+                    <td>{{ $item->durasi_sewa ?? "not found" }}</td>
                     <td>{{ $item->total_harga_sewa }}</td>
          
                 </tr>      

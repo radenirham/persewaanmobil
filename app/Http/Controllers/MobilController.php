@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Mobil;
+use Illuminate\Validation\Rule;
 
 class MobilController extends Controller
 {
@@ -44,13 +45,20 @@ class MobilController extends Controller
      */
     public function createmobil(Request $request)
     {
+        $request->validate([
+            'merek' => 'required|string|max:255',
+            'model' => 'required|string|max:255',
+            'platnomor' => 'required|string|max:20|unique:mobil,platnomor',
+            'tarifsewa' => 'required|numeric|min:0',
+        ]);
+
         $mobil = new mobil;
         $mobil->merek = $request->merek;
         $mobil->model = $request->model;
         $mobil->platnomor = $request->platnomor;
         $mobil->tarifsewa = $request->tarifsewa;
         $mobil->save();
-        return redirect()->route('mobil');
+        return redirect()->route('mobil.index')->with('success', 'Data mobil berhasil disimpan.');
     }
 
     /**

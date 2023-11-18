@@ -26,6 +26,11 @@
   <!-- Content Header (Page header) -->
   <div class="content-header">
     <div class="container-fluid">
+      @if(session('success'))
+          <div class="alert alert-success">
+              {{ session('success') }}
+          </div>
+      @endif
       <div class="row mb-2">
         <div class="col-sm-6">
           <h1 class="m-0">Peminjaman Mobil</h1>
@@ -58,6 +63,11 @@
                         <option value="{{$item->id}}">{{$item->merek}}</option>
                       @endforeach
                     </select>
+                    @foreach ($errors->get('merek') as $msg)
+                          <div class="alert alert-danger" role="alert">
+                          <p class="card-content red-text">{{ $msg }}</p>
+                        </div>
+                      @endforeach
                   </div>
                   <!-- Date dd/mm/yyyy -->
                   <div class="form-group">
@@ -68,7 +78,13 @@
                         <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                       </div>
                       <input type="text" name="awal_sewa" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy/mm/dd" data-mask>
+                      
                     </div>
+                    @foreach ($errors->get('awal_sewa') as $msg)
+                        <div class="alert alert-danger" role="alert">
+                        <p class="card-content red-text">{{ $msg }}</p>
+                      </div>
+                    @endforeach
                     <!-- /.input group -->
                   </div>  
                   <!-- /.form group -->
@@ -80,7 +96,13 @@
                         <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                       </div>
                       <input type="text" name="akhir_sewa" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy/mm/dd" data-mask>
+                      
                     </div>
+                    @foreach ($errors->get('akhir_sewa') as $msg)
+                        <div class="alert alert-danger" role="alert">
+                        <p class="card-content red-text">{{ $msg }}</p>
+                      </div>
+                    @endforeach
                   </div>  
               </div>
               <div class="card-footer">
@@ -95,6 +117,7 @@
               <thead>
                 <tr>
                   <th>Merek Mobil</th>
+                  <th>Plat Nomor</th>
                   <th>Waktu Awal Sewa</th>
                   <th>Waktu Akhir Sewa</th>                             
                 </tr>
@@ -103,6 +126,7 @@
               @foreach($pinjam as $item)
                 <tr>
                     <td>{{ $item->mobil->merek }}</td>
+                    <td>{{ $item->mobil->platnomor }}</td>
                     <td>{{ $item->awal_sewa }}</td>
                     <td>{{ $item->akhir_sewa }}</td>
                 </tr>      

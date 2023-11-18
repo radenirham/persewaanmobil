@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Pengembalian;
 use App\Models\Peminjaman;
 use App\Models\Mobil;
+use Carbon\Carbon;
 
 class PengembalianController extends Controller
 {
@@ -37,22 +38,46 @@ class PengembalianController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {
+        $request->validate([
+            'platnomor' => 'required',
+        ]);
         $platnomor = $request->platnomor;
-        $mobil = mobil::where('platnomor', $platnomor)->first();
+        $mobil = Mobil::where('platnomor', $platnomor)->first();
+    
+        if (!$mobil) {
+            return redirect()->route('pengembalian.index')->with('error', 'Mobil tidak ditemukan.');
+        }
+    
         $id_mobil = $mobil->id;
         $tarifsewa = $mobil->tarifsewa;
+    
         $peminjaman = Peminjaman::where('id_merek', $id_mobil)->first();
-        $durasisewa1 = $peminjaman->awal_sewa;
-        $durasisewa2 = $peminjaman->akhir_sewa;
-        $durasisewa = $durasisewa1->diff($durasisewa2);
+    
+        if (!$peminjaman) {
+            return redirect()->route('pengembalian.index')->with('error', 'Data peminjaman tidak ditemukan.');
+        }
+    
+        // Use Carbon to create DateTime objects
+        $durasisewa1 = Carbon::parse($peminjaman->awal_sewa);
+        $durasisewa2 = Carbon::now(); // Assuming 'akhir_sewa' represents the end of the rental, you can replace it with the correct value
+    
+        // Calculate the difference between start and end rental dates
+        $durasisewa = $durasisewa1->diffInDays($durasisewa2);
         $pengembalian = new Pengembalian;
-        $pengembalian->id_platnomor = $request->platnomor;
-        $pengembalian->harga = $tarifsewa * $durasisewa;
+        $pengembalian->id_platnomor = $id_mobil;
+        
+        // Calculate the total price based on the rental duration and the rental rate
+        $pengembalian->durasi_sewa = $durasisewa;
+        $pengembalian->total_harga_sewa = $tarifsewa * $durasisewa;
+    
         $pengembalian->save();
-        return redirect()->route('pengembalian.index');
+    
+        return redirect()->route('pengembalian.index')->with('success', 'Data pengembalian berhasil disimpan.');
     }
+    
 
     /**
      * Display the specified resource.

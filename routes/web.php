@@ -18,9 +18,8 @@ use App\Http\Controllers\AuthController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('auth');
+
 Route::prefix('mobil')->group(function () {
     Route::get('/index', [MobilController::class, 'index'])->name('mobil.index')->middleware('auth');
     Route::get('/create', [MobilController::class, 'create'])->name('mobil.create')->middleware('auth');
@@ -35,7 +34,6 @@ Route::prefix('pengembalian')->group(function () {
     Route::get('/index', [PengembalianController::class, 'index'])->name('pengembalian.index')->middleware('auth');
     Route::post('/store', [PengembalianController::class, 'store'])->name('pengembalian.store');
 });
-Route::resource('home', HomeController::class);
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/loginuser', [AuthController::class, 'loginuser'])->name('loginuser');
 

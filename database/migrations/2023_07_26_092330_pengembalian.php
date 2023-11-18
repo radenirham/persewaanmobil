@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('pengembalian', function (Blueprint $table) {
             $table->id();
             $table->bigint('id_platnomor');
+            $table->integer('durasi_sewa');
             $table->integer('total_harga_sewa');
             $table->timestamps();
         });
