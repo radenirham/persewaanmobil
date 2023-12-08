@@ -40,11 +40,10 @@ class AuthController extends Controller
 
     public function registeruser(Request $request)
     {
-        user::create([
-            'name' => $request->name,
-            'alamat' => $request->alamat,
-            'nomor' => $request->nomor,
-            'sim' => $request->sim,
+        User::create([
+            'pegawai_nama' => $request->nama,
+            'pegawai_umur' => $request->umur,
+            'pegawai_alamat' => $request->alamat,
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'remember_token' => Str::random(60),

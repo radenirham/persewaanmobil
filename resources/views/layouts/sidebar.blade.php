@@ -3,7 +3,7 @@
     <!-- Brand Logo -->
     <a href="{{url('/')}}" class="brand-link">
       <img src="{{asset('AdminLTE')}}/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">Persewaan Mobil</span>
+      <span class="brand-text font-weight-light">Aplikasi Ujian</span>
     </a>
 
     <!-- Sidebar -->
@@ -14,7 +14,7 @@
           <img src="{{asset('AdminLTE')}}/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{Auth::user()->name}}</a>
+          <a href="#" class="d-block">{{Auth::user()->nama_pegawai}}</a>
         </div>
       </div>  
 
@@ -32,43 +32,27 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{route('mobil.index')}}" class="nav-link" method="get">
-              <i class="nav-icon fas fa-car"></i>
+            <a href="{{route('pegawai.index')}}" class="nav-link" method="get">
+              <i class="nav-icon fas fa-user"></i>
               <p>
-                Mobil
+                Pegawai
               </p>
               <i class="right fas fa-angle-left"></i>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('mobil.index')}}" class="nav-link">
+                <a href="{{route('pegawai.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Mobil</p>
+                  <p>Pegawai</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('mobil.create')}}" class="nav-link">
+                <a href="{{route('pegawai.create')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Create Mobil</p>
+                  <p>Create Pegawai</p>
                 </a>
               </li>
             </ul>
-          </li>
-          <li class="nav-item">
-            <a href="{{route('pinjam.index')}}" class="nav-link" method="get">
-              <i class="nav-icon fas fa-clock"></i>
-              <p>
-                Peminjaman Mobil
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{route('pengembalian.index')}}" class="nav-link" method="get">
-              <i class="nav-icon fas fa-clock"></i>
-              <p>
-                Pengembalian Mobil
-              </p>
-            </a>
           </li>
           <li class="nav-item">
             <a href="{{route('logout')}}" class="nav-link">

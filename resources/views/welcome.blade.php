@@ -28,7 +28,7 @@
         <div class="card-header">
           <h3>
           <center>
-          Selamat Datang di Website Persewaan Mobil
+          Selamat Datang di Aplikasi Pegawai
           </center>
           </h3>
         </div>

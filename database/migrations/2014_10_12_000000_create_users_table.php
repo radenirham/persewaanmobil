@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('tbl_pegawai', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('alamat');
-            $table->string('nomor');
-            $table->string('sim');
+            $table->string('pegawai_nama');
+            $table->tinyInt('pegawai_umur');
+            $table->longText('pegawai_alamat');
+            $table->string('foto')->nullable();;
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

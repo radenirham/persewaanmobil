@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\MobilController;
+use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\PengembalianController;
 use App\Http\Controllers\HomeController;
@@ -19,12 +19,16 @@ use App\Http\Controllers\AuthController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
-Route::prefix('mobil')->group(function () {
-    Route::get('/index', [MobilController::class, 'index'])->name('mobil.index')->middleware('auth');
-    Route::get('/create', [MobilController::class, 'create'])->name('mobil.create')->middleware('auth');
-    Route::post('/createmobil', [MobilController::class, 'createmobil'])->name('createmobil');
+    return redirect()->route('home');
+})->name('/');
+
+Route::middleware('auth')->prefix('pegawai')->group(function () {
+    Route::get('/index', [PegawaiController::class, 'index'])->name('pegawai.index');
+    Route::get('/create', [PegawaiController::class, 'create'])->name('pegawai.create');
+    Route::post('/createuser', [PegawaiController::class, 'createuser'])->name('createuser');
+    Route::get('/edit/{id}', [PegawaiController::class, 'edit']);
+    Route::post('/edituser/{id}', [PegawaiController::class, 'edituser'])->name('edituser');
+    Route::get('/delete/{id}', [PegawaiController::class, 'destroy'])->name('delete');
 });
 
 Route::prefix('pinjam')->group(function () {
@@ -35,7 +39,7 @@ Route::prefix('pengembalian')->group(function () {
     Route::get('/index', [PengembalianController::class, 'index'])->name('pengembalian.index')->middleware('auth');
     Route::post('/store', [PengembalianController::class, 'store'])->name('pengembalian.store');
 });
-Route::resource('home', HomeController::class);
+Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('auth');
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/loginuser', [AuthController::class, 'loginuser'])->name('loginuser');
 

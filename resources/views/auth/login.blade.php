@@ -18,7 +18,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="{{asset('AdminLTE')}}/index2.html">Selamat Datang di <br><b>Persewaan Mobil</b></a>
+    <a href="{{asset('AdminLTE')}}/index2.html">Selamat Datang di <br><b>Aplikasi Pegawai</b></a>
   </div>
   <!-- /.login-logo -->
   <div class="card">

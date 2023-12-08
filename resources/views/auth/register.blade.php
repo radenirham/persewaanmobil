@@ -18,7 +18,7 @@
 <body class="hold-transition register-page">
 <div class="register-box">
   <div class="register-logo">
-    <a href="{{asset('AdminLTE')}}/index2.html">Selamat Datang di<br><b>Persawaan Mobil</b></a>
+    <a href="{{asset('AdminLTE')}}/index2.html">Selamat Datang di<br><b>Aplikasi Pegawai</b></a>
   </div>
 
   <div class="card">
@@ -28,7 +28,7 @@
       <form action="{{route('registeruser')}}" method="post">
         @csrf
         <div class="input-group mb-3">
-          <input type="text" class="form-control" name="name" placeholder="Full Name">
+          <input type="text" class="form-control" name="nama" placeholder="Nama">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -36,7 +36,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="alamat" class="form-control" name="alamat" placeholder="Alamat">
+          <input type="umur" class="form-control" name="umur" placeholder="NUmur">
           <div class="input-group-append">
             <div class="input-group-text">
               
@@ -44,15 +44,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="nomor" class="form-control" name="nomor" placeholder="Nomor Telepon">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              
-            </div>
-          </div>
-        </div>
-        <div class="input-group mb-3">
-          <input type="sim" class="form-control" name="sim" placeholder="Nomor SIM">
+          <input type="sim" class="form-control" name="alamat" placeholder="alamat">
           <div class="input-group-append">
             <div class="input-group-text">
               

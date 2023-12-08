@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('tittle','Manajemen Mobil')
+@section('tittle','Aplikasi Ujian')
 @section('content')
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -7,12 +7,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">Mobil</h1>
+          <h1 class="m-0">Pegawai</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
-            <li class="breadcrumb-item active">Mobil</li>
+            <li class="breadcrumb-item active">Pegawai</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
@@ -24,8 +24,8 @@
     <div class="col-12">
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Daftar Mobil</h3>
-          <form action="{{route('mobil.index')}}" method="get">
+          <h3 class="card-title">Daftar Pegawai</h3>
+          <form action="{{route('pegawai.index')}}" method="get">
           <div class="card-tools">
             <div class="input-group input-group-sm" style="width: 150px;">
               <input type="text" name="keyword" class="form-control float-right" placeholder="Search">
@@ -43,19 +43,30 @@
           <table class="table table-hover text-nowrap">
             <thead>
               <tr>
-                <th>Merek Mobil</th>
-                <th>Model</th>
-                <th>Nomor Plat</th>
-                <th>Tarif Sewa Per Hari</th>                                
+                <th>No</th>
+                <th>Foto</th>
+                <th>Nama</th>
+                <th>Umur</th>
+                <th>alamat</th>                                
+                <th>Opsi</th>                                
               </tr>
             </thead>
             <tbody>
-            @foreach($mobil as $item)
+            @foreach($pegawai as $item)
               <tr>
-                  <td>{{ $item->merek }}</td>
-                  <td>{{ $item->model }}</td>
-                  <td>{{ $item->platnomor }}</td>
-                  <td>{{ $item->tarifsewa }}</td>     
+                  <td>{{ $loop->iteration }}</td>
+                  <td><img src="{{ asset('image/' . $item->foto) }}" alt="Product Image" style="height:200px;width:200px;"></td>
+                  <td>{{ $item->pegawai_nama }}</td>
+                  <td>{{ $item->pegawai_umur }}</td>   
+                  <td>{{ $item->pegawai_alamat }}</td>
+                  <td>
+                  <a href="edit/{{$item->id}}" method="get">
+                    <i class="nav-icon fas fa-edit"></i>
+                  </a>
+                  <a href="delete/{{$item->id}}" method="post" onclick="return confirm('Yakin ingin menghapus data?')">
+                    <i class="nav-icon fas fa-trash"></i>
+                  </a>
+                  </td>
               </tr>      
             @endforeach                 
             </tbody>
